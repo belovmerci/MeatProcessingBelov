@@ -13,9 +13,4 @@ public partial class Ассортименты
 
     public int? РецептураFk { get; set; }
 
-    public virtual Магазины? МагазинFkNavigation { get; set; }
-
-    public virtual ICollection<Продажи>? Продажиs { get; set; } = new List<Продажи>();
-
-    public virtual Рецептуры? РецептураFkNavigation { get; set; }
 }

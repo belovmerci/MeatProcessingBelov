@@ -9,5 +9,4 @@ public partial class ТипыЖивотных
 
     public string? Название { get; set; }
 
-    public virtual ICollection<Животные> Животныеs { get; set; } = new List<Животные>();
 }

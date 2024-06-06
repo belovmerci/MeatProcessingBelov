@@ -11,5 +11,4 @@ public partial class Загоны
 
     public string? Описание { get; set; }
 
-    public virtual ICollection<Животные>? Животныеs { get; set; } = new List<Животные>();
 }

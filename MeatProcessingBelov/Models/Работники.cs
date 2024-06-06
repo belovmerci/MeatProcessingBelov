@@ -19,9 +19,4 @@ public partial class Работники
 
     public string? СерияНомерПаспорта { get; set; }
 
-    public virtual ICollection<РаботникиМагазинов> РаботникиМагазиновs { get; set; } = new List<РаботникиМагазинов>();
-
-    public virtual ICollection<РаботникиПоТипам> РаботникиПоТипамs { get; set; } = new List<РаботникиПоТипам>();
-
-    public virtual ICollection<Смены> Сменыs { get; set; } = new List<Смены>();
 }

@@ -11,5 +11,4 @@ public partial class ТипыРаботников
 
     public string? Описание { get; set; }
 
-    public virtual ICollection<РаботникиПоТипам> РаботникиПоТипамs { get; set; } = new List<РаботникиПоТипам>();
 }

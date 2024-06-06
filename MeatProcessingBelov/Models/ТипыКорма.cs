@@ -9,5 +9,4 @@ public partial class ТипыКорма
 
     public string? Название { get; set; }
 
-    public virtual ICollection<Корма> Кормаs { get; set; } = new List<Корма>();
 }

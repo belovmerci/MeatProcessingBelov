@@ -15,7 +15,4 @@ public partial class Оборудование
 
     public bool Активный { get; set; }
 
-    public virtual ICollection<ЖурналОпераций> ЖурналОперацийs { get; set; } = new List<ЖурналОпераций>();
-
-    public virtual ICollection<ОборудованиеПоРецептурам> ОборудованиеПоРецептурамs { get; set; } = new List<ОборудованиеПоРецептурам>();
 }

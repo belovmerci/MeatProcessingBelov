@@ -96,14 +96,6 @@ public partial class BelovMeat2207sb1Context : DbContext
                 .HasColumnName("АссортиментID");
             entity.Property(e => e.МагазинFk).HasColumnName("МагазинFK");
             entity.Property(e => e.РецептураFk).HasColumnName("РецептураFK");
-
-            entity.HasOne(d => d.МагазинFkNavigation).WithMany(p => p.Ассортиментыs)
-                .HasForeignKey(d => d.МагазинFk)
-                .HasConstraintName("FK__Ассортиме__Магаз__00200768");
-
-            entity.HasOne(d => d.РецептураFkNavigation).WithMany(p => p.Ассортиментыs)
-                .HasForeignKey(d => d.РецептураFk)
-                .HasConstraintName("FK__Ассортиме__Рецеп__01142BA1");
         });
 
         modelBuilder.Entity<Животные>(entity =>
@@ -121,13 +113,6 @@ public partial class BelovMeat2207sb1Context : DbContext
             entity.Property(e => e.Пол).HasMaxLength(50);
             entity.Property(e => e.ТипЖивотногоFk).HasColumnName("Тип_животногоFK");
 
-            entity.HasOne(d => d.ЗагонFkNavigation).WithMany(p => p.Животныеs)
-                .HasForeignKey(d => d.ЗагонFk)
-                .HasConstraintName("FK__Животные__ЗагонF__5CD6CB2B");
-
-            entity.HasOne(d => d.ТипЖивотногоFkNavigation).WithMany(p => p.Животныеs)
-                .HasForeignKey(d => d.ТипЖивотногоFk)
-                .HasConstraintName("FK__Животные__Тип_жи__5DCAEF64");
         });
 
         modelBuilder.Entity<ЖивотныеПоЗабоям>(entity =>
@@ -143,13 +128,6 @@ public partial class BelovMeat2207sb1Context : DbContext
             entity.Property(e => e.ЗабойFk).HasColumnName("ЗабойFK");
             entity.Property(e => e.Название).HasMaxLength(50);
 
-            entity.HasOne(d => d.ЖивотноеFkNavigation).WithMany(p => p.ЖивотныеПоЗабоямs)
-                .HasForeignKey(d => d.ЖивотноеFk)
-                .HasConstraintName("FK__Животные___Живот__6C190EBB");
-
-            entity.HasOne(d => d.ЗабойFkNavigation).WithMany(p => p.ЖивотныеПоЗабоямs)
-                .HasForeignKey(d => d.ЗабойFk)
-                .HasConstraintName("FK__Животные___Забой__6B24EA82");
         });
 
         modelBuilder.Entity<ЖурналОпераций>(entity =>
@@ -167,21 +145,6 @@ public partial class BelovMeat2207sb1Context : DbContext
             entity.Property(e => e.ОборудованиеFk).HasColumnName("ОборудованиеFK");
             entity.Property(e => e.СменаFk).HasColumnName("СменаFK");
 
-            entity.HasOne(d => d.ЖивотноеFkNavigation).WithMany(p => p.ЖурналОперацийs)
-                .HasForeignKey(d => d.ЖивотноеFk)
-                .HasConstraintName("FK__Журнал_оп__Живот__7D439ABD");
-
-            entity.HasOne(d => d.КормFkNavigation).WithMany(p => p.ЖурналОперацийs)
-                .HasForeignKey(d => d.КормFk)
-                .HasConstraintName("FK__Журнал_оп__КормF__7A672E12");
-
-            entity.HasOne(d => d.ОборудованиеFkNavigation).WithMany(p => p.ЖурналОперацийs)
-                .HasForeignKey(d => d.ОборудованиеFk)
-                .HasConstraintName("FK__Журнал_оп__Обору__7B5B524B");
-
-            entity.HasOne(d => d.СменаFkNavigation).WithMany(p => p.ЖурналОперацийs)
-                .HasForeignKey(d => d.СменаFk)
-                .HasConstraintName("FK__Журнал_оп__Смена__7C4F7684");
         });
 
         modelBuilder.Entity<Забои>(entity =>
@@ -195,9 +158,6 @@ public partial class BelovMeat2207sb1Context : DbContext
                 .HasColumnName("ЗабойID");
             entity.Property(e => e.СменаFk).HasColumnName("СменаFK");
 
-            entity.HasOne(d => d.СменаFkNavigation).WithMany(p => p.Забоиs)
-                .HasForeignKey(d => d.СменаFk)
-                .HasConstraintName("FK__Забои__СменаFK__68487DD7");
         });
 
         modelBuilder.Entity<Загоны>(entity =>
@@ -229,13 +189,7 @@ public partial class BelovMeat2207sb1Context : DbContext
             entity.Property(e => e.СкладFk).HasColumnName("СкладFK");
             entity.Property(e => e.ТипКормаFk).HasColumnName("Тип_кормаFK");
 
-            entity.HasOne(d => d.СкладFkNavigation).WithMany(p => p.Кормаs)
-                .HasForeignKey(d => d.СкладFk)
-                .HasConstraintName("FK__Корма__СкладFK__656C112C");
 
-            entity.HasOne(d => d.ТипКормаFkNavigation).WithMany(p => p.Кормаs)
-                .HasForeignKey(d => d.ТипКормаFk)
-                .HasConstraintName("FK__Корма__Тип_корма__6477ECF3");
         });
 
         modelBuilder.Entity<Магазины>(entity =>
@@ -274,17 +228,6 @@ public partial class BelovMeat2207sb1Context : DbContext
             entity.Property(e => e.РефрижераторFk).HasColumnName("РефрижераторFK");
             entity.Property(e => e.ТипМясаFk).HasColumnName("Тип_мясаFK");
 
-            entity.HasOne(d => d.ЗабойFkNavigation).WithMany(p => p.Мясоs)
-                .HasForeignKey(d => d.ЗабойFk)
-                .HasConstraintName("FK__Мясо__ЗабойFK__70DDC3D8");
-
-            entity.HasOne(d => d.РефрижераторFkNavigation).WithMany(p => p.Мясоs)
-                .HasForeignKey(d => d.РефрижераторFk)
-                .HasConstraintName("FK__Мясо__Рефрижерат__6EF57B66");
-
-            entity.HasOne(d => d.ТипМясаFkNavigation).WithMany(p => p.Мясоs)
-                .HasForeignKey(d => d.ТипМясаFk)
-                .HasConstraintName("FK__Мясо__Тип_мясаFK__6FE99F9F");
         });
 
         modelBuilder.Entity<Оборудование>(entity =>
@@ -314,13 +257,6 @@ public partial class BelovMeat2207sb1Context : DbContext
             entity.Property(e => e.ОборудованиеFk).HasColumnName("ОборудованиеFK");
             entity.Property(e => e.РецептураFk).HasColumnName("РецептураFK");
 
-            entity.HasOne(d => d.ОборудованиеFkNavigation).WithMany(p => p.ОборудованиеПоРецептурамs)
-                .HasForeignKey(d => d.ОборудованиеFk)
-                .HasConstraintName("FK__Оборудова__Обору__4E88ABD4");
-
-            entity.HasOne(d => d.РецептураFkNavigation).WithMany(p => p.ОборудованиеПоРецептурамs)
-                .HasForeignKey(d => d.РецептураFk)
-                .HasConstraintName("FK__Оборудова__Рецеп__4D94879B");
         });
 
         modelBuilder.Entity<ПартииМясныхПродуктов>(entity =>
@@ -337,9 +273,6 @@ public partial class BelovMeat2207sb1Context : DbContext
                 .HasColumnName("Дата_производства");
             entity.Property(e => e.РецептураFk).HasColumnName("РецептураFK");
 
-            entity.HasOne(d => d.РецептураFkNavigation).WithMany(p => p.ПартииМясныхПродуктовs)
-                .HasForeignKey(d => d.РецептураFk)
-                .HasConstraintName("FK__Партии_мя__Рецеп__73BA3083");
         });
 
         modelBuilder.Entity<ПартииПоМагазинам>(entity =>
@@ -360,13 +293,6 @@ public partial class BelovMeat2207sb1Context : DbContext
             entity.Property(e => e.МагазинFk).HasColumnName("МагазинFK");
             entity.Property(e => e.ПартияFk).HasColumnName("ПартияFK");
 
-            entity.HasOne(d => d.МагазинFkNavigation).WithMany(p => p.ПартииПоМагазинамs)
-                .HasForeignKey(d => d.МагазинFk)
-                .HasConstraintName("FK__Партии_по__Магаз__778AC167");
-
-            entity.HasOne(d => d.ПартияFkNavigation).WithMany(p => p.ПартииПоМагазинамs)
-                .HasForeignKey(d => d.ПартияFk)
-                .HasConstraintName("FK__Партии_по__Парти__76969D2E");
         });
 
         modelBuilder.Entity<Продажи>(entity =>
@@ -381,13 +307,6 @@ public partial class BelovMeat2207sb1Context : DbContext
             entity.Property(e => e.АссортиментFk).HasColumnName("АссортиментFK");
             entity.Property(e => e.МагазинFk).HasColumnName("МагазинFK");
 
-            entity.HasOne(d => d.АссортиментFkNavigation).WithMany(p => p.Продажиs)
-                .HasForeignKey(d => d.АссортиментFk)
-                .HasConstraintName("FK__Продажи__Ассорти__04E4BC85");
-
-            entity.HasOne(d => d.МагазинFkNavigation).WithMany(p => p.Продажиs)
-                .HasForeignKey(d => d.МагазинFk)
-                .HasConstraintName("FK__Продажи__Магазин__03F0984C");
         });
 
         modelBuilder.Entity<Работники>(entity =>
@@ -421,13 +340,6 @@ public partial class BelovMeat2207sb1Context : DbContext
             entity.Property(e => e.МагазинFk).HasColumnName("МагазинFK");
             entity.Property(e => e.РаботникFk).HasColumnName("РаботникFK");
 
-            entity.HasOne(d => d.МагазинFkNavigation).WithMany(p => p.РаботникиМагазиновs)
-                .HasForeignKey(d => d.МагазинFk)
-                .HasConstraintName("FK__Работники__Магаз__403A8C7D");
-
-            entity.HasOne(d => d.РаботникFkNavigation).WithMany(p => p.РаботникиМагазиновs)
-                .HasForeignKey(d => d.РаботникFk)
-                .HasConstraintName("FK__Работники__Работ__3F466844");
         });
 
         modelBuilder.Entity<РаботникиПоТипам>(entity =>
@@ -442,13 +354,6 @@ public partial class BelovMeat2207sb1Context : DbContext
             entity.Property(e => e.РаботникFk).HasColumnName("РаботникFK");
             entity.Property(e => e.ТипРаботникаFk).HasColumnName("Тип_работникаFK");
 
-            entity.HasOne(d => d.РаботникFkNavigation).WithMany(p => p.РаботникиПоТипамs)
-                .HasForeignKey(d => d.РаботникFk)
-                .HasConstraintName("FK__Работники__Работ__44FF419A");
-
-            entity.HasOne(d => d.ТипРаботникаFkNavigation).WithMany(p => p.РаботникиПоТипамs)
-                .HasForeignKey(d => d.ТипРаботникаFk)
-                .HasConstraintName("FK__Работники__Тип_р__45F365D3");
         });
 
         modelBuilder.Entity<Рефрижераторы>(entity =>
@@ -504,9 +409,6 @@ public partial class BelovMeat2207sb1Context : DbContext
             entity.Property(e => e.Начало).HasColumnType("datetime");
             entity.Property(e => e.РаботникFk).HasColumnName("РаботникFK");
 
-            entity.HasOne(d => d.РаботникFkNavigation).WithMany(p => p.Сменыs)
-                .HasForeignKey(d => d.РаботникFk)
-                .HasConstraintName("FK__Смены__РаботникF__398D8EEE");
         });
 
         modelBuilder.Entity<ТипыЖивотных>(entity =>
@@ -557,13 +459,6 @@ public partial class BelovMeat2207sb1Context : DbContext
             entity.Property(e => e.РецептураFk).HasColumnName("РецептураFK");
             entity.Property(e => e.ТипМясаFk).HasColumnName("Тип_мясаFK");
 
-            entity.HasOne(d => d.РецептураFkNavigation).WithMany(p => p.ТипыМясаПоРецептурамs)
-                .HasForeignKey(d => d.РецептураFk)
-                .HasConstraintName("FK__Типы_мяса__Рецеп__534D60F1");
-
-            entity.HasOne(d => d.ТипМясаFkNavigation).WithMany(p => p.ТипыМясаПоРецептурамs)
-                .HasForeignKey(d => d.ТипМясаFk)
-                .HasConstraintName("FK__Типы_мяса__Тип_м__5441852A");
         });
 
         modelBuilder.Entity<ТипыРаботников>(entity =>

@@ -17,11 +17,4 @@ public partial class ЖурналОпераций
 
     public int? ЖивотноеFk { get; set; }
 
-    public virtual Животные? ЖивотноеFkNavigation { get; set; }
-
-    public virtual Корма? КормFkNavigation { get; set; }
-
-    public virtual Оборудование? ОборудованиеFkNavigation { get; set; }
-
-    public virtual Смены? СменаFkNavigation { get; set; }
 }

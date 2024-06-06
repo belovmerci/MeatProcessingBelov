@@ -13,5 +13,4 @@ public partial class Рефрижераторы
 
     public int? ВместимостьКг { get; set; }
 
-    public virtual ICollection<Мясо> Мясоs { get; set; } = new List<Мясо>();
 }

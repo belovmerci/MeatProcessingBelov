@@ -11,7 +11,4 @@ public partial class ПартииМясныхПродуктов
 
     public int? РецептураFk { get; set; }
 
-    public virtual ICollection<ПартииПоМагазинам> ПартииПоМагазинамs { get; set; } = new List<ПартииПоМагазинам>();
-
-    public virtual Рецептуры? РецептураFkNavigation { get; set; }
 }

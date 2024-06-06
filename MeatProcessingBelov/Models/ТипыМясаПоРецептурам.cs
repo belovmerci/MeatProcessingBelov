@@ -11,7 +11,4 @@ public partial class ТипыМясаПоРецептурам
 
     public int? ТипМясаFk { get; set; }
 
-    public virtual Рецептуры? РецептураFkNavigation { get; set; }
-
-    public virtual ТипыМяса? ТипМясаFkNavigation { get; set; }
 }

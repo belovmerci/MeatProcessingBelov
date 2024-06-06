@@ -13,7 +13,4 @@ public partial class Продажи
 
     public int? АссортиментFk { get; set; }
 
-    public virtual Ассортименты? АссортиментFkNavigation { get; set; }
-
-    public virtual Магазины? МагазинFkNavigation { get; set; }
 }

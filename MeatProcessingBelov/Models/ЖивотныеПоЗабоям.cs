@@ -13,7 +13,4 @@ public partial class ЖивотныеПоЗабоям
 
     public int? ЖивотноеFk { get; set; }
 
-    public virtual Животные? ЖивотноеFkNavigation { get; set; }
-
-    public virtual Забои? ЗабойFkNavigation { get; set; }
 }
