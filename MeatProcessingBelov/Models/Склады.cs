@@ -11,4 +11,5 @@ public partial class Склады
 
     public string? Локация { get; set; }
 
+    public virtual ICollection<Корма> Кормаs { get; set; } = new List<Корма>();
 }

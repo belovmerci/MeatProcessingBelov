@@ -9,4 +9,7 @@ public partial class ТипыМяса
 
     public string? Название { get; set; }
 
+    public virtual ICollection<Мясо> Мясоs { get; set; } = new List<Мясо>();
+
+    public virtual ICollection<ТипыМясаПоРецептурам> ТипыМясаПоРецептурамs { get; set; } = new List<ТипыМясаПоРецептурам>();
 }

@@ -17,5 +17,9 @@ public partial class Мясо
 
     public int? ЗабойFk { get; set; }
 
+    public virtual Забои? ЗабойFkNavigation { get; set; }
 
+    public virtual Рефрижераторы? РефрижераторFkNavigation { get; set; }
+
+    public virtual ТипыМяса? ТипМясаFkNavigation { get; set; }
 }

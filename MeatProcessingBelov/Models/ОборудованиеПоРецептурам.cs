@@ -11,5 +11,7 @@ public partial class ОборудованиеПоРецептурам
 
     public int? ОборудованиеFk { get; set; }
 
+    public virtual Оборудование? ОборудованиеFkNavigation { get; set; }
 
+    public virtual Рецептуры? РецептураFkNavigation { get; set; }
 }

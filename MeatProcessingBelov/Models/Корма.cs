@@ -15,4 +15,9 @@ public partial class Корма
 
     public int? СкладFk { get; set; }
 
+    public virtual ICollection<ЖурналОпераций> ЖурналОперацийs { get; set; } = new List<ЖурналОпераций>();
+
+    public virtual Склады? СкладFkNavigation { get; set; }
+
+    public virtual ТипыКорма? ТипКормаFkNavigation { get; set; }
 }

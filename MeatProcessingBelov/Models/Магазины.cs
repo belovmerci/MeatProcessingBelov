@@ -19,4 +19,11 @@ public partial class Магазины
 
     public bool Активный { get; set; }
 
+    public virtual ICollection<Ассортименты> Ассортиментыs { get; set; } = new List<Ассортименты>();
+
+    public virtual ICollection<ПартииПоМагазинам> ПартииПоМагазинамs { get; set; } = new List<ПартииПоМагазинам>();
+
+    public virtual ICollection<Продажи> Продажиs { get; set; } = new List<Продажи>();
+
+    public virtual ICollection<РаботникиМагазинов> РаботникиМагазиновs { get; set; } = new List<РаботникиМагазинов>();
 }

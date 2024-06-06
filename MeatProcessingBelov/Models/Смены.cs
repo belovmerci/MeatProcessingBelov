@@ -13,4 +13,9 @@ public partial class Смены
 
     public int? РаботникFk { get; set; }
 
+    public virtual ICollection<ЖурналОпераций> ЖурналОперацийs { get; set; } = new List<ЖурналОпераций>();
+
+    public virtual ICollection<Забои> Забоиs { get; set; } = new List<Забои>();
+
+    public virtual Работники? РаботникFkNavigation { get; set; }
 }

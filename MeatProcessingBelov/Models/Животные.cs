@@ -19,4 +19,11 @@ public partial class Животные
 
     public int? ТипЖивотногоFk { get; set; }
 
+    public virtual ICollection<ЖивотныеПоЗабоям> ЖивотныеПоЗабоямs { get; set; } = new List<ЖивотныеПоЗабоям>();
+
+    public virtual ICollection<ЖурналОпераций> ЖурналОперацийs { get; set; } = new List<ЖурналОпераций>();
+
+    public virtual Загоны? ЗагонFkNavigation { get; set; }
+
+    public virtual ТипыЖивотных? ТипЖивотногоFkNavigation { get; set; }
 }

@@ -11,4 +11,7 @@ public partial class РаботникиПоТипам
 
     public int? ТипРаботникаFk { get; set; }
 
+    public virtual Работники? РаботникFkNavigation { get; set; }
+
+    public virtual ТипыРаботников? ТипРаботникаFkNavigation { get; set; }
 }

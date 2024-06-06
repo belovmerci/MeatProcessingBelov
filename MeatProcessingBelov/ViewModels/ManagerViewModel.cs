@@ -90,7 +90,7 @@ namespace MeatProcessingBelov.ViewModels
             // Example query for pre-made queries
             PreMadeQueryResults = new ObservableCollection<dynamic>(
                 await context.Работникиs
-                    .Select(w => new { w.Имя })
+                    .Select(w => new { w.Имя, w.Сменыs, w.РаботникиПоТипамs })
                     .ToListAsync()
             );
         }

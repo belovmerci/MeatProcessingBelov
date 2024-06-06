@@ -1,4 +1,19 @@
-﻿using MeatProcessingBelov.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+using MeatProcessingBelov.ViewModels;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,8 +22,16 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Controls;
+
 using MeatProcessingBelov.ViewModels;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace MeatProcessingBelov.Views
 {
@@ -16,7 +39,7 @@ namespace MeatProcessingBelov.Views
     {
         private ObservableCollection<FieldEntry> _entryFields;
         private ObservableCollection<string> _tableNames;
-        private ObservableCollection<dynamic> _tableData;
+        private ObservableCollection<object> _tableData;
         private string _selectedTable;
 
         public AdminControl()
@@ -27,7 +50,7 @@ namespace MeatProcessingBelov.Views
             // Initialize collections
             EntryFields = new ObservableCollection<FieldEntry>();
             TableNames = new ObservableCollection<string>();
-            TableData = new ObservableCollection<dynamic>();
+            TableData = new ObservableCollection<object>();
 
             // Load table names from database
             LoadTableNames();
@@ -55,7 +78,7 @@ namespace MeatProcessingBelov.Views
             }
         }
 
-        public ObservableCollection<dynamic> TableData
+        public ObservableCollection<object> TableData
         {
             get { return _tableData; }
             set
@@ -95,19 +118,6 @@ namespace MeatProcessingBelov.Views
                 TableNames.Add(tableName);
             }
         }
-        /*
-        private async Task LoadTableNames()
-        {
-            var context = DbContextFactory.GetExistingDbContext();
-            var tempTableNames = context.GetType().GetProperties()
-                .Where(p => p.PropertyType.IsGenericType && p.PropertyType.GetGenericTypeDefinition() == typeof(DbSet<>))
-                .Select(p => p.Name).ToList();
-            // Retrieve all table names in the database
-            TableNames = new ObservableCollection<string>();
-            foreach (var table in tempTableNames) TableNames.Add(table);
-        }
-        */
-
 
         private void LoadTableColumns()
         {
@@ -117,55 +127,45 @@ namespace MeatProcessingBelov.Views
                 return;
 
             var context = DbContextFactory.GetExistingDbContext();
-                var entityType = context.Model.FindEntityType($"MeatProcessingBelov.Models.{SelectedTable}");
-                if (entityType == null)
+            var columns = context.Model.FindEntityType($"MeatProcessingBelov.Models.{SelectedTable}")
+                .GetProperties()
+                .Select(p => p.Name)
+                .ToList();
+            foreach (var column in columns)
+            {
+                if (!column.Equals("ID", StringComparison.OrdinalIgnoreCase))
                 {
-                    throw new InvalidOperationException($"The table {SelectedTable} does not exist in the context.");
+                    EntryFields.Add(new FieldEntry { FieldName = column });
                 }
-
-                var columns = entityType.GetProperties()
-                    .Select(p => p.Name)
-                    .ToList();
-
-                foreach (var column in columns)
-                {
-                    if (!column.Equals("ID", StringComparison.OrdinalIgnoreCase))
-                    {
-                        EntryFields.Add(new FieldEntry { FieldName = column });
-                    }
-                }
+            }
         }
 
-        private async Task LoadTableData()
+        private void LoadTableData()
         {
             var context = DbContextFactory.GetExistingDbContext();
-                var sql = $"SELECT * FROM {SelectedTable}";
-                var data = await context.Set<dynamic>()
-                    .FromSqlRaw(sql)
-                    .ToListAsync();
-
-                TableData.Clear();
-                foreach (var item in data)
-                {
-                    TableData.Add(item);
-                }
+            var data = context.Set<object>().FromSqlRaw($"SELECT * FROM {SelectedTable}").ToList();
+            TableData.Clear();
+            foreach (var item in data)
+            {
+                TableData.Add(item);
+            }
         }
 
         private async Task AddEntry()
         {
             var context = DbContextFactory.GetExistingDbContext();
-                var newEntry = new Dictionary<string, object>();
-                foreach (var field in EntryFields)
-                {
-                    newEntry.Add(field.FieldName, field.FieldValue);
-                }
+            var newEntry = new Dictionary<string, object>();
+            foreach (var field in EntryFields)
+            {
+                newEntry.Add(field.FieldName, field.FieldValue);
+            }
 
-                var columnNames = string.Join(", ", newEntry.Keys);
-                var parameterNames = string.Join(", ", newEntry.Keys.Select(k => $"@{k}"));
-                var sql = $"INSERT INTO {SelectedTable} ({columnNames}) VALUES ({parameterNames})";
+            var columnNames = string.Join(", ", newEntry.Keys);
+            var parameterNames = string.Join(", ", newEntry.Keys.Select(k => $"@{k}"));
+            var sql = $"INSERT INTO {SelectedTable} ({columnNames}) VALUES ({parameterNames})";
 
-                var parameters = newEntry.Select(kvp => new SqlParameter($"@{kvp.Key}", kvp.Value ?? DBNull.Value)).ToArray();
-                await context.Database.ExecuteSqlRawAsync(sql, parameters);
+            var parameters = newEntry.Select(kvp => new SqlParameter($"@{kvp.Key}", kvp.Value ?? DBNull.Value)).ToArray();
+            await context.Database.ExecuteSqlRawAsync(sql, parameters);
 
             foreach (var field in EntryFields)
             {
